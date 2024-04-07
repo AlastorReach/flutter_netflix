@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final sessionProvider =
-    Provider<Session>((_) => Session(isLoggedIn: true, token: ''));
+    Provider<Session>((_) => Session(isLoggedIn: false, token: ''));
 
 class Session {
   final String token;

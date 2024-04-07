@@ -82,18 +82,34 @@ class DrawerListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: press,
-      horizontalTitleGap: 0.0,
-      /*
-      leading: SvgPicture.asset(
-        svgSrc,
-        colorFilter: const ColorFilter.mode(Colors.white54, BlendMode.srcIn),
-        height: 16,
-      ),*/
-      title: Text(
-        title,
-        style: const TextStyle(color: Colors.white54),
+    return MenuAnchor(
+      menuChildren: List<MenuItemButton>.generate(
+        3,
+        (int index) => MenuItemButton(
+          onPressed: () {},
+          //setState(() => selectedMenu = SampleItem.values[index]),
+          child: Text('Item ${index + 1}'),
+        ),
+      ),
+      builder: (context, controller, widget) => ListTile(
+        onTap: () {
+          if (controller.isOpen) {
+            controller.close();
+          } else {
+            controller.open();
+          }
+        },
+        horizontalTitleGap: 0.0,
+        /*
+        leading: SvgPicture.asset(
+          svgSrc,
+          colorFilter: const ColorFilter.mode(Colors.white54, BlendMode.srcIn),
+          height: 16,
+        ),*/
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.white54),
+        ),
       ),
     );
   }
