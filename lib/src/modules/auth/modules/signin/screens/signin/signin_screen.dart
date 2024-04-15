@@ -5,6 +5,8 @@ import 'package:my_netflix_api_admin_web/src/infrastructure/responsive.dart';
 import 'package:my_netflix_api_admin_web/src/modules/auth/modules/signin/widgets/login_text_field.dart';
 import 'package:my_netflix_api_admin_web/src/presentation/common/widgets/logo.dart';
 
+import '../../../../../../presentation/common/widgets/hover_underlined_text_button.dart';
+
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});
 
@@ -56,7 +58,7 @@ class LoginView extends StatelessWidget {
                 ),
               ],
             ),
-          const LoginForm()
+          const LoginForm(),
         ],
       );
     }));
@@ -68,12 +70,10 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Container(
-      margin: const EdgeInsets.only(bottom: 50, top: kToolbarHeight),
-      width: 450,
-      color: Colors.black.withAlpha(178),
-      child: const FormMainWrapper(),
+    return const Center(
+        child: DarkAlphaContainer(
+      margin: EdgeInsets.only(bottom: 50, top: kToolbarHeight),
+      child: FormMainWrapper(),
     ));
   }
 }
@@ -116,16 +116,75 @@ class FormMainWrapper extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      textStyle: TextStyle(color: Colors.white)),
+                  child: const Text(
+                    "Iniciar sesión",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: HoverUnderlineTextButton(
+                  onPressed: () {},
+                  text: '¿Olvidaste la contraseña?',
+                ),
+              ),
+              Row(
+                children: [
+                  Checkbox(value: false, onChanged: (value) {}),
+                  const Text('Recuérdame')
+                ],
+              ),
+              Row(
+                children: [
+                  const Text('¿Primera vez en Netflix?'),
+                  HoverUnderlineTextButton(
                     onPressed: () {},
-                    child: Text("Iniciar sesión"),
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(primaryColor),
-                    )),
+                    text: 'Suscríbete ahora',
+                  ),
+                ],
               )
             ],
-          ))
+          )),
         ],
+      ),
+    );
+  }
+}
+
+class DarkAlphaContainer extends StatelessWidget {
+  final EdgeInsetsGeometry? margin;
+  final Widget child;
+  const DarkAlphaContainer({super.key, required this.child, this.margin});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: margin,
+        width: 450,
+        color: Colors.black.withAlpha(178),
+        child: child);
+  }
+}
+
+class Footer extends StatelessWidget {
+  const Footer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const DarkAlphaContainer(
+      child: SizedBox(
+        height: 400,
+        width: double.infinity,
       ),
     );
   }
