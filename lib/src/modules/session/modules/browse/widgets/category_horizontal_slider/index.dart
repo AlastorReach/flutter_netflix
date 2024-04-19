@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_netflix_api_admin_web/src/infrastructure/responsive.dart';
+import 'package:my_netflix_api_admin_web/src/infrastructure/router/router.dart';
 
 class CategoryHorizontalSlider extends StatelessWidget {
   const CategoryHorizontalSlider({super.key});
@@ -48,7 +50,7 @@ class CategoryHorizontalSlider extends StatelessWidget {
   }
 }
 
-class NetflixSliderItem extends StatelessWidget {
+class NetflixSliderItem extends ConsumerWidget {
   final String title;
   final String description;
   final double width;
@@ -62,14 +64,17 @@ class NetflixSliderItem extends StatelessWidget {
       required this.height});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.purple,
-      height: height,
-      width: width,
-      child: Image.network(
-        'https://occ-0-4668-3934.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABd1xOJSxaTL-0mVsdg0jc-DTfeh5wzz4DGMaLQqqN-2dhfGFRGMv8ZAEmOYVT66XgercNshD-SZ4u_18aLW3VUyA4frld5KCQEs.webp?r=1c1',
-        fit: BoxFit.cover,
+  Widget build(BuildContext context, WidgetRef ref) {
+    return InkWell(
+      onTap: () => ref.read(routerProvider).go('/browse/watch'),
+      child: Container(
+        color: Colors.purple,
+        height: height,
+        width: width,
+        child: Image.network(
+          'https://occ-0-4668-3934.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABd1xOJSxaTL-0mVsdg0jc-DTfeh5wzz4DGMaLQqqN-2dhfGFRGMv8ZAEmOYVT66XgercNshD-SZ4u_18aLW3VUyA4frld5KCQEs.webp?r=1c1',
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
