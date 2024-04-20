@@ -82,7 +82,7 @@ flutter:
     - assets/images/profile_icons/
     - assets/SVGs/
     - assets/SVGs/video_player/
-    - assets/videos/
+    #- assets/videos/
     - assets/subtitles/
   #   - images/a_dot_ham.jpeg
 
